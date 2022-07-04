@@ -36,8 +36,11 @@ public class ControladorJugador : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate()
     {
+        //Se obtiene el valor de los axis del jugador
         float hInput = Input.GetAxis("Horizontal");
         float vInput = Input.GetAxis("Vertical");
+
+        //Se verifica si está yendo a la izquierda o no
         if(Input.GetKeyDown(KeyCode.A)){
             izquierda = true;
         }
@@ -63,6 +66,7 @@ public class ControladorJugador : MonoBehaviour
         movimiento.x = hInput;
         movimiento.y = vInput;
 
+        //Se acciona el movimiento del jugador
         rb.MovePosition(rb.position + movimiento * velocidad * Time.deltaTime);
         animador.SetFloat("Horizontal", movimiento.x);
         animador.SetFloat("Velocidad", movimiento.sqrMagnitude);
@@ -72,11 +76,12 @@ public class ControladorJugador : MonoBehaviour
     private void Rotacion(float vInput)
     {
 
-        //Invertir dirección de rotación al estar a la izquierda
+        //Se invierte la dirección de rotación al estar a la izquierda
         if(izquierda){
             vInput = -vInput;
         }
 
+        //Se configura la rotación
         float rotacion = vInput * velocidadRotacion * Time.deltaTime;
         float rotacionZ = transform.eulerAngles.z;
 

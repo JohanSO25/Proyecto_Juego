@@ -10,42 +10,60 @@ public class ControladorMenuPausa : MonoBehaviour
     public GameObject menuPausaIU;
 
     public GameObject musica;
+    public Texture2D cursor;
 
-    public GameObject cantMonedas;
+    public GameObject jugador;
 
-    private void Start(){
-
+    private void Start()
+    {
+        Cursor.SetCursor(cursor, Vector2.zero, CursorMode.ForceSoftware);
+        Cursor.visible = false;
     }
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape)){
-            if(juegoPausado){
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            if(juegoPausado)
+            {
                 Reanudar();
-            }else{
+            }else
+            {
                 Pausar();
             }
         }
     }
 
-    public void Reanudar(){
+    public void Reanudar()
+    {
         musica.GetComponent<AudioSource>().Play();
-        cantMonedas.SetActive(true);
         menuPausaIU.SetActive(false);
         Time.timeScale = 1f;
         juegoPausado = false;
+        Cursor.visible = false;
     }
 
-    private void Pausar(){
+    private void Pausar()
+    {
         musica.GetComponent<AudioSource>().Pause();
         menuPausaIU.SetActive(true);
-        cantMonedas.SetActive(false);
         Time.timeScale = 0f;
         juegoPausado = true;
+        Cursor.visible = true;
     }
 
-    public void Salir(){
+    public void Salir()
+    {
         Time.timeScale = 1f;
         juegoPausado = false;
+        GuardarPuntaje(jugador.GetComponent<JugadorInteracciones>().cantEstrellas);
         SceneManager.LoadScene("MenuPrincipal");
+    }
+
+    private void GuardarPuntaje(int cantidad)
+    {
+        if(cantidad > jugador.GetComponent<JugadorInteracciones>().maxEstrellas)
+        {
+            PlayerPrefs.SetInt("puntajeMax", jugador.GetComponent<JugadorInteracciones>().maxEstrellas);
+        }
     }
 }
