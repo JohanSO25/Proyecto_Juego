@@ -18,6 +18,7 @@ public class ControladorMenuPrincipal : MonoBehaviour
 
     public void Start()
     {
+        Cursor.visible = true;
         Cursor.SetCursor(cursor, Vector2.zero, CursorMode.ForceSoftware);
         puntuacion.text = "Highscore: " + PlayerPrefs.GetInt("puntajeMax");
     }
