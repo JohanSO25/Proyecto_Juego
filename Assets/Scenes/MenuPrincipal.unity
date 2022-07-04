@@ -496,7 +496,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Were \n    are we_"
+  m_Text: "Where \n    are we_"
 --- !u!222 &264886001
 CanvasRenderer:
   m_ObjectHideFlags: 0
